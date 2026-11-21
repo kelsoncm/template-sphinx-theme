@@ -16,7 +16,13 @@
     {%- if theme_github_url %}
     <a href="{{ theme_github_url|e }}" rel="noopener">GitHub</a>
     {%- endif %}
-    <button type="button" class="nt-theme-toggle" data-nt-theme-toggle aria-label="{{ _('Toggle color theme') }}">◐</button>
+    {#- O botão mostra a ação que executa; o JS troca o texto conforme o tema ativo. #}
+    {%- if (language or '').startswith('pt') %}
+      {%- set nt_to_light, nt_to_dark = 'Modo claro', 'Modo escuro' %}
+    {%- else %}
+      {%- set nt_to_light, nt_to_dark = 'Light mode', 'Dark mode' %}
+    {%- endif %}
+    <button type="button" class="nt-theme-toggle" data-nt-theme-toggle data-label-to-light="{{ nt_to_light }}" data-label-to-dark="{{ nt_to_dark }}">◐ {{ nt_to_dark }}</button>
   </nav>
 </header>
 {%- endblock %}
