@@ -20,11 +20,11 @@ html_theme_options = {{
 """
 
 
-def build(tmp_path: Path) -> str:
+def build(tmp_path: Path, extra_conf: str = "") -> str:
     """Gera um projeto Sphinx mínimo com o tema e devolve o HTML da página inicial."""
     src = tmp_path / "src"
     src.mkdir()
-    (src / "conf.py").write_text(CONF.format(theme=THEME_NAME), encoding="utf-8")
+    (src / "conf.py").write_text(CONF.format(theme=THEME_NAME) + extra_conf, encoding="utf-8")
     (src / "index.rst").write_text("Título\n======\n\nTexto.\n", encoding="utf-8")
     out = tmp_path / "out"
     app = Sphinx(str(src), str(src), str(out), str(tmp_path / "doctrees"), "html", status=None, warningiserror=True)
@@ -43,6 +43,19 @@ def test_build_uses_theme_options(tmp_path: Path) -> None:
     assert 'href="https://github.com/org/repo"' in html
     assert "Rodapé extra" in html
     assert "data-nt-theme-toggle" in html
+
+
+def test_theme_button_shows_the_action_in_english(tmp_path: Path) -> None:
+    html = build(tmp_path)
+    assert 'data-label-to-light="Light mode"' in html
+    assert 'data-label-to-dark="Dark mode"' in html
+    assert "◐ Dark mode</button>" in html
+
+
+def test_theme_button_shows_the_action_in_portuguese(tmp_path: Path) -> None:
+    html = build(tmp_path, 'language = "pt_BR"\n')
+    assert 'data-label-to-light="Modo claro"' in html
+    assert "◐ Modo escuro</button>" in html
 
 
 def test_static_files_are_copied(tmp_path: Path) -> None:
