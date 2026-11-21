@@ -11,6 +11,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    # Biblioteca: só sobe o piso da dependência quando a nova versão não cabe na faixa declarada.
+    versioning-strategy: "increase-if-necessary"
     groups:
       python:
         patterns: ["*"]
