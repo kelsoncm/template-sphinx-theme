@@ -1,0 +1,32 @@
+{%- extends "basic/layout.html" %}
+
+{%- block extrahead %}
+  {{ super() }}
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {%- if theme_primary_color %}
+  <style>:root { --nt-primary: {{ theme_primary_color|e }}; }</style>
+  {%- endif %}
+  <script src="{{ pathto('_static/js/newtheme.js', 1) }}" defer></script>
+{%- endblock %}
+
+{%- block relbar1 %}
+<header class="nt-header">
+  <a class="nt-brand" href="{{ pathto(root_doc) }}">{{ project|e }}</a>
+  <nav class="nt-actions">
+    {%- if theme_github_url %}
+    <a href="{{ theme_github_url|e }}" rel="noopener">GitHub</a>
+    {%- endif %}
+    <button type="button" class="nt-theme-toggle" data-nt-theme-toggle aria-label="{{ _('Toggle color theme') }}">◐</button>
+  </nav>
+</header>
+{%- endblock %}
+
+{%- block relbar2 %}{%- endblock %}
+
+{%- block footer %}
+<footer class="nt-footer">
+  {%- if theme_footer_text %}{{ theme_footer_text }} &middot; {% endif -%}
+  {%- if show_copyright and copyright %}&copy; {{ copyright|e }} &middot; {% endif -%}
+  {{ project|e }} &middot; newtheme-sphinx-theme {{ newtheme_version }}
+</footer>
+{%- endblock %}

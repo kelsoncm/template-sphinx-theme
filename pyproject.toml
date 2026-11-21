@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "newtheme-sphinx-theme"
+version = "0.1.0"
+description = "{{DESCRIPTION}}"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE.md"]
+authors = [{ name = "{{AUTHOR}}", email = "you@example.com" }]
+requires-python = ">=3.10"
+dependencies = ["sphinx>=7.3"]
+keywords = ["sphinx", "theme", "documentation"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Sphinx",
+    "Framework :: Sphinx :: Theme",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Documentation",
+    "Topic :: Documentation :: Sphinx",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=4.3",
+    "ruff>=0.17",
+    "mypy>=2.4",
+    "types-docutils>=0.21",
+    "pytest>=9.0",
+    "pytest-cov>=7.0",
+    "doc8>=2.0",
+]
+docs = []
+
+[project.urls]
+Homepage = "https://{{OWNER}}.github.io/newtheme-sphinx-theme/"
+Repository = "https://github.com/{{OWNER}}/newtheme-sphinx-theme"
+Issues = "https://github.com/{{OWNER}}/newtheme-sphinx-theme/issues"
+
+# O Sphinx encontra o tema pelo nome (html_theme = "newtheme_sphinx_theme") por este entry point.
+[project.entry-points."sphinx.html_themes"]
+newtheme_sphinx_theme = "newtheme_sphinx_theme"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+newtheme_sphinx_theme = ["*.html", "theme.toml", "py.typed", "static/css/*.css", "static/js/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=newtheme_sphinx_theme --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["newtheme_sphinx_theme"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "S"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.mypy]
+strict = true
+python_version = "3.10"
+files = ["src", "tests"]

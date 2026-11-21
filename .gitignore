@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Ferramentas
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Documentação
+docs/_build/
+_site/
+
+# Segredos e configuração local
+.env
+.pypirc
+
+# Editores e sistema
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

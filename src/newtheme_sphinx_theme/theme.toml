@@ -1,0 +1,13 @@
+[theme]
+inherit = "basic"
+stylesheets = ["basic.css", "css/newtheme.css"]
+sidebars = ["localtoc.html", "relations.html", "searchbox.html"]
+pygments_style = { default = "default", dark = "monokai" }
+
+[options]
+# Cor principal (links, cabeçalho). Vazio usa a cor padrão do CSS.
+primary_color = ""
+# Link do repositório no cabeçalho.
+github_url = ""
+# Texto extra no rodapé (HTML permitido).
+footer_text = ""
